@@ -1,34 +1,26 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.util.Scanner;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.File;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 
 public class Server {
     public static void main(String[] args) {
         try {
+			
             File log = new File("log.txt");
-            String header = "DATETIME\t\tEVENT\t\tDESCRIPTION";
-            BufferedWriter hdr = new BufferedWriter(new FileWriter(log,true));
-            hdr.write(header);
-            hdr.close();
+            boolean exists = log.exists();
+            if(!exists){
+				String header = "DATETIME\t\tEVENT\t\tDESCRIPTION";
+				BufferedWriter hdr = new BufferedWriter(new FileWriter(log,true));
+				hdr.write(header);
+				hdr.close();
+			}
+			
+			
             final int PUERTO = 11111;
 
             ServerSocket server = new ServerSocket(PUERTO);
