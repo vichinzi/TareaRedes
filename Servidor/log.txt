@@ -1339,3 +1339,39 @@ DATETIME		EVENT		DESCRIPTION
 
 
 2019-05-17 18:09:53.818	response	servidor envia respuesta a/127.0.0.1:41906
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-17 18:29:42.732	connection	/127.0.0.1:41996conexion entrante
+
+
+2019-05-17 18:29:43.887	command		/127.0.0.1:41996 ls
+
+
+2019-05-17 18:29:43.89	response	servidor envia respuesta a/127.0.0.1:41996
+
+
+2019-05-17 18:29:55.53	command		/127.0.0.1:41996 ls
+
+
+2019-05-17 18:29:55.531	response	servidor envia respuesta a/127.0.0.1:41996
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-17 18:39:30.08	connection	/127.0.0.1:42004conexion entrante
+
+
+2019-05-17 18:39:30.725	command		/127.0.0.1:42004 ls
+
+
+2019-05-17 18:39:30.728	response	servidor envia respuesta a/127.0.0.1:42004
+
+
+2019-05-17 18:39:36.842	command		/127.0.0.1:42004 ls
+
+
+2019-05-17 18:39:36.842	response	servidor envia respuesta a/127.0.0.1:42004
+
+
+2019-05-17 18:39:42.472	command		/127.0.0.1:42004 ls
+
+
+2019-05-17 18:39:42.472	response	servidor envia respuesta a/127.0.0.1:42004
