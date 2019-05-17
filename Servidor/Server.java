@@ -120,11 +120,12 @@ public class Server {
         DataInputStream isss = new DataInputStream(socket.getInputStream());
         largo = isss.readUTF();
         largito = Integer.parseInt(largo);
+        System.out.println(largito);
 
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
         osss.writeUTF("gracias");
 
-        InputStream iss = socket.getInputStream();
+        DataInputStream iss = new DataInputStream(socket.getInputStream());
         byte[] mybytearray = new byte[largito];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -172,7 +173,6 @@ class ThreadSocket extends Thread{
             while(flag){
 
                 //Leo el mensaje que me envia el cliente
-                System.out.println("CAQUITA");
                 mensaje = in.readUTF();
 
 

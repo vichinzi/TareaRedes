@@ -164,11 +164,13 @@ public class Cliente {
         DataInputStream isss = new DataInputStream(socket.getInputStream());
         largo = isss.readUTF();
         largito = Integer.parseInt(largo);
+        System.out.println(largito);
 
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
         osss.writeUTF("gracias");
 
-        InputStream iss = socket.getInputStream();
+        
+        DataInputStream iss = new DataInputStream(socket.getInputStream());
         byte[] mybytearray = new byte[largito];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
