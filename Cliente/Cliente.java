@@ -36,7 +36,7 @@ public class Cliente {
             
             //variables usadas para put y get
             String palabra;
-            String[] palabras 
+            String[] palabras; 
             
 			boolean flag = true;
             while(flag){
