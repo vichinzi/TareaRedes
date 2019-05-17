@@ -169,15 +169,14 @@ public class Cliente {
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
         osss.writeUTF("gracias");
 
-        
         DataInputStream iss = new DataInputStream(socket.getInputStream());
         byte[] mybytearray = new byte[largito];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-        current = iss.read(mybytearray); //nunca esta leyendo el -1 porqueeee!!!
+        iss.readFully(mybytearray); //nunca esta leyendo el -1 porqueeee!!!
 
-        bos.write(mybytearray, 0, current);
+        bos.write(mybytearray, 0, largito);
 
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
