@@ -120,19 +120,18 @@ public class Server {
         DataInputStream isss = new DataInputStream(socket.getInputStream());
         largo = isss.readUTF();
         largito = Integer.parseInt(largo);
-        System.out.println(largito);
 
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
         osss.writeUTF("gracias");
 
-        DataInputStream iss = new DataInputStream(socket.getInputStream());
+        InputStream iss = socket.getInputStream();
         byte[] mybytearray = new byte[largito];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-        iss.readFully(mybytearray); //nunca esta leyendo el -1 porqueeee!!!
+        current = iss.read(mybytearray); //nunca esta leyendo el -1 porqueeee!!!
 
-        bos.write(mybytearray, 0, largito);
+        bos.write(mybytearray, 0, current);
 
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
@@ -173,6 +172,7 @@ class ThreadSocket extends Thread{
             while(flag){
 
                 //Leo el mensaje que me envia el cliente
+                System.out.println("CAQUITA");
                 mensaje = in.readUTF();
 
 
