@@ -1,35 +1,25 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
+
 import java.net.ServerSocket;
 import java.util.Scanner;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.File;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Timestamp;
 
 public class Server {
     public static void main(String[] args) {
         try {
+
             File log = new File("log.txt");
             String header = "DATETIME\t\tEVENT\t\tDESCRIPTION";
             BufferedWriter hdr = new BufferedWriter(new FileWriter(log,true));
             hdr.write(header);
             hdr.close();
             final int PUERTO = 11111;
+
+            System.out.println("alo");
 
             ServerSocket server = new ServerSocket(PUERTO);
 
@@ -43,8 +33,16 @@ public class Server {
         }
     }
 
+    public boolean estaenarr(String [] arr,int n ,String element){
+        for (int i=0;i<n;i++) {
+            if (element.equals(arr[i])) {
+                return true;
+            }
+        }
+        return false;   
+    }
 
-    public void lss(DataOutputStream oe,String socketIP) throws Exception{
+    public void lss(DataOutputStream oe,String socketIP,String []ips,int n_ip) throws Exception{
         
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String loguear = "\n"+time+"\tcommand\t\t"+socketIP+" ls\n";
@@ -55,11 +53,59 @@ public class Server {
         w.write(loguear);
         w.close();
 
-        File dir = new File(System.getProperty("user.dir"));
-        File[] uwu = dir.listFiles();
-        for (File file : uwu){
-            oe.writeUTF(file.getName()); //(-><-)
+        String ip2 [] =new String [n_ip] ;
+        int j = 0;
+        for (int i=0; i<n_ip;i++){//agrega a la lista ip2 los que logran conectarse de ips, j es tamaño final
+            try{
+                Socket soc = new Socket(ips[i], 11111);
+                //despues de hs
+                System.out.println("conexion con: " + ips[i]);
+                DataOutputStream dos = new DataOutputStream(soc.getOutputStream());
+                dos.writeUTF("ls");
+
+
+                ip2[j] = ips[i];
+                j++; 
+                
+
+            }
+            catch(Exception e){
+                
+                continue;
+            }
         }
+
+
+        File dir = new File("INDEX.txt");
+        BufferedReader br = new BufferedReader(new FileReader(dir));
+        String st, st2;
+        boolean ayuda;
+        while((st = br.readLine()) != null){
+            st = st.split(" ")[1];
+            File dir2 =new File(st);
+            BufferedReader br2 = new BufferedReader(new FileReader(dir2));
+            boolean flaggy = true;
+            System.out.println("st: " +st);
+            while((st2 = br2.readLine()) != null){ //recorriendo miniindex
+                System.out.println(st2);
+                ayuda = estaenarr(ip2,j,st2);
+                if (!ayuda){//si cualquier ip de éste no esta en lista de ips utiles no sirve
+                    flaggy = false;
+
+                }
+
+            }
+            System.out.println(flaggy);
+            if (flaggy){
+                oe.writeUTF(st);
+            }
+            
+            br2.close();
+        }
+        br.close();
+        
+
+
         oe.writeUTF("Finisher"); //(2) segunda ida al servidor
         oe.writeUTF("ls oe");
 
@@ -111,6 +157,8 @@ public class Server {
 
     public void recivir(Socket socket, String name) throws Exception {
 
+
+
         String largo;
         int largito;
         int bytesRead;
@@ -151,6 +199,7 @@ class ThreadSocket extends Thread{
     @Override
     public void run() {     
         try {
+
             String socketIP = sc.getRemoteSocketAddress().toString();
             Timestamp time = new Timestamp(System.currentTimeMillis());
             String loguear = "\n"+time+"\tconnection\t"+socketIP+"conexion entrante\n";
@@ -160,6 +209,26 @@ class ThreadSocket extends Thread{
             w.newLine();
             w.write(loguear);
             w.close();
+
+            File ipfile = new File("ip.txt");
+            BufferedReader br = new BufferedReader(new FileReader(ipfile));
+            int n_ip = Integer.parseInt(br.readLine());
+            String[] ips = new String[n_ip];
+            
+            for (int i=0;i<n_ip;i++){
+                ips[i] = br.readLine();
+
+            }
+
+            br.close();
+
+            File file = new File("INDEX.txt");
+            if(file.createNewFile())
+                System.out.println("Se creo fichero INDEX");
+
+
+            
+
 
             DataInputStream in;
             File filemanager;
@@ -188,7 +257,7 @@ class ThreadSocket extends Thread{
 
                     DataOutputStream out = new DataOutputStream(sc.getOutputStream());
                     try {
-                        new Server().lss(out,socketIP);
+                        new Server().lss(out,socketIP,ips,n_ip);
                     } catch (Exception ex) {
                         Logger.getLogger(ThreadSocket.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -207,6 +276,7 @@ class ThreadSocket extends Thread{
                 }
 
                 else if(mensaje.split(" ")[0].equals("put")) {
+
                     String[] palabras = mensaje.split(" ");
                     String palabra = palabras[1].replaceAll("\\s","");
                     DataOutputStream out = new DataOutputStream(sc.getOutputStream());
