@@ -229,9 +229,6 @@ public class Server {
             largito = largito - largodenvio;
             nro_index = nro_index + 1;
             //leo la confirmacion de la maquina
-            DataInputStream inputmaquina = new DataInputStream(socketmaquina.getInputStream());
-            System.out.println(" caca");
-            System.out.println(inputmaquina.readUTF());//archivo creado
             socketmaquina.close();
             //out.write(buffer, 0, largodenvio);
             

@@ -1720,3 +1720,12 @@ DATETIME		EVENT		DESCRIPTION
 
 
 2019-05-19 18:49:55.073	response	servidor envia respuesta a/127.0.0.1:56037
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-19 19:08:14.434	connection	/127.0.0.1:56061conexion entrante
+
+
+2019-05-19 19:08:18.265	command		/127.0.0.1:56061 ls
+
+
+2019-05-19 19:08:18.626	response	servidor envia respuesta a/127.0.0.1:56061
