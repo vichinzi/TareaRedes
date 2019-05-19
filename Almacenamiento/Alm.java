@@ -118,7 +118,7 @@ public class Alm {
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
 
-        iss.readFully(mybytearray); //leo el arreglo de bytes
+        System.out.println(iss.readFully(mybytearray)); //leo el arreglo de bytes
 
         bos.write(mybytearray, 0, buffer);//creo el archivo con bytes
 

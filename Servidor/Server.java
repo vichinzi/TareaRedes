@@ -218,7 +218,6 @@ public class Server {
 
             BufferedOutputStream outmaquina = new BufferedOutputStream(socketmaquina.getOutputStream());
             System.out.println(largito);
-            System.out.println(largito);
 
             if (largito > largodenvio) {
                 outmaquina.write(mybytearray, largobase, largodenvio);
@@ -231,6 +230,7 @@ public class Server {
             nro_index = nro_index + 1;
             //leo la confirmacion de la maquina
             DataInputStream inputmaquina = new DataInputStream(socketmaquina.getInputStream());
+            System.out.println(" caca");
             System.out.println(inputmaquina.readUTF());//archivo creado
             socketmaquina.close();
             //out.write(buffer, 0, largodenvio);
