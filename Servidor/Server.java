@@ -217,11 +217,13 @@ public class Server {
             //falta el handshake!!!
 
             BufferedOutputStream outmaquina = new BufferedOutputStream(socketmaquina.getOutputStream());
+            System.out.println(largito);
+            System.out.println(largito);
 
             if (largito > largodenvio) {
                 outmaquina.write(mybytearray, largobase, largodenvio);
             }else{//si es el pedazo sobrante
-                outmaquina.write(mybytearray, largobase, largodenvio-largito);
+                outmaquina.write(mybytearray, largobase, largito);
             }
 
             largobase = largobase + largodenvio;
