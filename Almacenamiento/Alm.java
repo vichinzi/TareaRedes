@@ -95,28 +95,36 @@ public class Alm {
         int largito;
         int bytesRead;
         int current = 0;
+        int largodenvio = 1024 * 64;
+        int buffer;
         String nombre = name;
+
 
         DataInputStream isss = new DataInputStream(socket.getInputStream());
         largo = isss.readUTF();
         largito = Integer.parseInt(largo);
-        System.out.println(largito);
+        if (largito > largodenvio) {
+            buffer = largodenvio;
+        }else{
+            buffer = largito;
+        }
 
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
-        osss.writeUTF("gracias");
+        osss.writeUTF("largo recivido");
 
         DataInputStream iss = new DataInputStream(socket.getInputStream());
-        byte[] mybytearray = new byte[largito];
+        byte[] mybytearray = new byte[buffer];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-        iss.readFully(mybytearray); //nunca esta leyendo el -1 porqueeee!!!
 
-        bos.write(mybytearray, 0, largito);
+        iss.readFully(mybytearray); //leo el arreglo de bytes
+
+        bos.write(mybytearray, 0, buffer);//creo el archivo con bytes
 
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
-        System.out.println("Archivo creado");
+        osss.writeUTF("Archivo creado");
         bos.close();
         fos.close();
     }
@@ -158,25 +166,29 @@ class ThreadSocket extends Thread{
                     String palabra = palabras[1].replaceAll("\\s","");
                     System.out.println(palabra);
                     try {
-                        new Server().enviar(palabra,sc);
+                        new Alm().enviar(palabra,sc);
                     } catch (Exception ex) {
                         Logger.getLogger(ThreadSocket.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
+                */
                 else if(mensaje.split(" ")[0].equals("put")) {
+
                     String[] palabras = mensaje.split(" ");
-                    String palabra = palabras[1].replaceAll("\\s","");
-                    DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-                    out.writeUTF(palabra);
+                    String nombre_archivo = palabras[1].replaceAll("\\s","");
+
+                    //enviamos primera confirmación a server
+                    DataOutputStream outtt = new DataOutputStream(sc.getOutputStream());
+                    outtt.writeUTF("Maquina ha recivido el metodo/nombre");
                     //InputStream ins = sc.getInputStream();
                     try {
-                        new Server().recivir(sc,palabra);
+                        new Alm().recivir(sc,nombre_archivo);
                     } catch (Exception ex) {
                         Logger.getLogger(ThreadSocket.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }
+                /*
 
                 else if(mensaje.split(" ")[0].equals("delete")){
                     DataOutputStream out = new DataOutputStream(sc.getOutputStream());

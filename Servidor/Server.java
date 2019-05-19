@@ -193,7 +193,7 @@ public class Server {
         String str_largo;
         while (largito > 0) {//mientras queden bytes por enviar
 
-            int randomIPindex = ThreadLocalRandom.current().nextInt(0, n_ip + 1);
+            int randomIPindex = ThreadLocalRandom.current().nextInt(0, n_ip);
             String ipcita = ipes[randomIPindex];//obtengo la ip donde quedara el pedazito
             BufferedWriter escribirr = new BufferedWriter(new FileWriter(file,true));//escribo la ip en el index
             escribirr.write(ipcita);
@@ -204,7 +204,7 @@ public class Server {
             String index_stringeado = Integer.toString(nro_index);
 
             //IMPORTANTE: FORMATO DE ENVIO ES: Metodo/nombre_archivo_a_crear_en_maquina.txt
-            String nombrearchivo = "put/" + jpg;
+            String nombrearchivo = "put " + jpg;
             outps.writeUTF(nombrearchivo); //escribo el nombre que tendra el archivo en la maquina (haya lo guardo)
             DataInputStream inpst = new DataInputStream(socketmaquina.getInputStream());
             System.out.println(inpst.readUTF()); //confirmacion de que se recivio el nombre
@@ -219,7 +219,7 @@ public class Server {
             if (largito > largodenvio) {
                 outmaquina.write(mybytearray, largobase, largodenvio);
             }else{//si es el pedazo sobrante
-                outmaquina.write(mybytearray, largobase, largodenvio-largito);
+                outmaquin.write(mybytearray, largobase, largodenvio-largito);
             }
 
             largobase = largobase + largodenvio;
@@ -346,9 +346,13 @@ class ThreadSocket extends Thread{
 
                     //Recivimos put "archivo" y obtenemos la palabra
                     String[] palabras = mensaje.split(" ");
-                    String palabra = palabras[1].replaceAll("\\s",""); //algo.jpg
+                    
+                    String palabra = palabras[1]; //algo.jpg
 
-                    String[] sinexts = palabra.split(".");
+                    String[] sinexts = new String[2];
+                    sinexts = palabra.split("\\.");
+                    System.out.println();
+                    
                     String nombre = sinexts[0] + ".txt";
 
                     //Creamos el index palabra.txt
