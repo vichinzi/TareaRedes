@@ -67,7 +67,8 @@ public class Server {
 
                 ip2[j] = ips[i];
                 j++; 
-                
+                soc.close();
+
 
             }
             catch(Exception e){
@@ -197,6 +198,7 @@ public class Server {
             String ipcita = ipes[randomIPindex];//obtengo la ip donde quedara el pedazito
             BufferedWriter escribirr = new BufferedWriter(new FileWriter(file,true));//escribo la ip en el index
             escribirr.write(ipcita);
+            System.out.println(ipcita);
             escribirr.close();
 
             Socket socketmaquina = new Socket(ipcita, PUERTO); //me conecto a la maquina
@@ -219,7 +221,7 @@ public class Server {
             if (largito > largodenvio) {
                 outmaquina.write(mybytearray, largobase, largodenvio);
             }else{//si es el pedazo sobrante
-                outmaquin.write(mybytearray, largobase, largodenvio-largito);
+                outmaquina.write(mybytearray, largobase, largodenvio-largito);
             }
 
             largobase = largobase + largodenvio;
