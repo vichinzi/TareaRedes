@@ -140,6 +140,7 @@ public class Cliente {
 
         int current;
         current = bis.read(mybytearray);
+        System.out.println(current);
         outt.write(mybytearray,0, current);
 
 
