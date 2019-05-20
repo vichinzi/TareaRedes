@@ -108,26 +108,26 @@ public class Alm {
         }else{
             buffer = largito;
         }
+        System.out.println(largo);
 
         DataOutputStream osss = new DataOutputStream(socket.getOutputStream());
-        osss.writeUTF("largo recivido");
+        osss.writeUTF(largo);
 
         DataInputStream iss = new DataInputStream(socket.getInputStream());
         byte[] mybytearray = new byte[buffer];
         FileOutputStream fos = new FileOutputStream(nombre);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-
+        System.out.println(buffer);
         iss.readFully(mybytearray); //leo el arreglo de bytes
 
         bos.write(mybytearray, 0, buffer);//creo el archivo con bytes
-        
+
+        bos.flush();
         bos.close();
         fos.close();
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
-        osss.writeUTF("Archivo creado");
-
     }
 }
 

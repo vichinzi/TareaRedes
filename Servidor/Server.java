@@ -157,7 +157,7 @@ public class Server {
 
     }
 
-    public void recibirparanenvio(Socket socket, String name, String[] ipes, File file, int n_ip, int PUERTO,String nombresinext,String jpg) throws Exception {
+    public void recibirparanenvio(Socket socket, String name, String[] ipes, File file, int n_ip, int puer,String nombresinext,String jpg) throws Exception {
 
         String largo;
         int largito;
@@ -202,17 +202,25 @@ public class Server {
             System.out.println(ipcita);
             escribirr.close();
 
-            Socket socketmaquina = new Socket(ipcita, PUERTO); //me conecto a la maquina
+            Socket socketmaquina = new Socket(ipcita, puer); //me conecto a la maquina
             DataOutputStream outps = new DataOutputStream(socketmaquina.getOutputStream());
             String index_stringeado = Integer.toString(nro_index);
 
             //IMPORTANTE: FORMATO DE ENVIO ES: Metodo/nombre_archivo_a_crear_en_maquina.txt
             String nombrearchivo = "put " + jpg;
             outps.writeUTF(nombrearchivo); //escribo el nombre que tendra el archivo en la maquina (haya lo guardo)
+
             DataInputStream inpst = new DataInputStream(socketmaquina.getInputStream());
             System.out.println(inpst.readUTF()); //confirmacion de que se recivio el nombre
             str_largo = Integer.toString(largito);
-            System.out.println("El largo es: " inpst.readUTF());//confirmacion de que se recivio el largo
+
+            DataOutputStream outputito = new DataOutputStream(socketmaquina.getOutputStream());
+            outputito.writeUTF(str_largo);
+
+
+            DataInputStream inputito = new DataInputStream(socketmaquina.getInputStream());
+            String algo = inputito.readUTF();
+            System.out.println("El largo es: "+ algo);//confirmacion de que se recivio el largo
 
             //falta el handshake!!!
 
