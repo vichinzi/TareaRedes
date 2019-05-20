@@ -225,6 +225,7 @@ public class Server {
             //falta el handshake!!!
 
             BufferedOutputStream outmaquina = new BufferedOutputStream(socketmaquina.getOutputStream());
+            System.out.println(largito);
 
             if (largito > largodenvio) {
                 outmaquina.write(mybytearray, largobase, largodenvio);
@@ -236,9 +237,6 @@ public class Server {
             largito = largito - largodenvio;
             nro_index = nro_index + 1;
             //leo la confirmacion de la maquina
-            DataInputStream asdds = new DataInputStream(socketmaquina.getInputStream());
-            System.out.println(asdds.readUTF());
-
             socketmaquina.close();
             //out.write(buffer, 0, largodenvio);
             

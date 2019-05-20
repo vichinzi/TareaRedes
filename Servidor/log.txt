@@ -1915,3 +1915,54 @@ DATETIME		EVENT		DESCRIPTION
 
 
 2019-05-20 00:21:14.873	response	servidor envia respuesta a/127.0.0.1:57185
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-20 00:27:16.584	connection	/127.0.0.1:57193conexion entrante
+
+
+2019-05-20 00:27:18.282	command		/127.0.0.1:57193 ls
+
+
+2019-05-20 00:27:18.392	response	servidor envia respuesta a/127.0.0.1:57193
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-20 00:31:39.692	connection	/127.0.0.1:57201conexion entrante
+
+
+2019-05-20 00:32:01.439	command		/127.0.0.1:57201 ls
+
+
+2019-05-20 00:32:01.552	response	servidor envia respuesta a/127.0.0.1:57201
+
+
+2019-05-20 00:32:18.614	command		/127.0.0.1:57201 ls
+
+
+2019-05-20 00:32:18.715	response	servidor envia respuesta a/127.0.0.1:57201
+
+
+2019-05-20 00:32:20.073	command		/127.0.0.1:57201 ls
+
+
+2019-05-20 00:32:20.193	response	servidor envia respuesta a/127.0.0.1:57201
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-20 00:33:11.584	connection	/127.0.0.1:57210conexion entrante
+
+
+2019-05-20 00:33:12.831	command		/127.0.0.1:57210 ls
+
+
+2019-05-20 00:33:12.943	response	servidor envia respuesta a/127.0.0.1:57210
+
+
+2019-05-20 00:33:19.094	command		/127.0.0.1:57210 ls
+
+
+2019-05-20 00:33:19.202	response	servidor envia respuesta a/127.0.0.1:57210
+
+
+2019-05-20 00:33:27.365	command		/127.0.0.1:57210 ls
+
+
+2019-05-20 00:33:27.461	response	servidor envia respuesta a/127.0.0.1:57210
