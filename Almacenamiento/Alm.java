@@ -126,7 +126,7 @@ public class Alm {
         bos.close();
         fos.close();
 
-        DataOutputStream sdas = new DataOutputStream(socket.getOutputStream);
+        DataOutputStream sdas = new DataOutputStream(socket.getOutputStream());
         sdas.writeUTF("Se creo ya");
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
