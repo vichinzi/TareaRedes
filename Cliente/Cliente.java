@@ -136,6 +136,7 @@ public class Cliente {
         byte[] mybytearray = new byte[largo];
         FileInputStream fis = new FileInputStream(concatenacion);
         BufferedInputStream bis = new BufferedInputStream(fis);
+        
         BufferedOutputStream outt = new BufferedOutputStream(socket.getOutputStream());
 
         int current;
