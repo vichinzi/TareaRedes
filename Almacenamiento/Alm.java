@@ -119,13 +119,15 @@ public class Alm {
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 
         System.out.println(buffer);
-        iss.readFully(mybytearray); //leo el arreglo de bytes
+        iss.read(mybytearray); //leo el arreglo de bytes
 
         bos.write(mybytearray, 0, buffer);//creo el archivo con bytes
 
-        bos.flush();
         bos.close();
         fos.close();
+
+        DataOutputStream sdas = new DataOutputStream(socket.getOutputStream);
+        sdas.writeUTF("Se creo ya");
         //bos.write(mybytearray, 0, bytesRead);
         //bos.flush();
     }
