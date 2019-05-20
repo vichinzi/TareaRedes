@@ -1966,3 +1966,18 @@ DATETIME		EVENT		DESCRIPTION
 
 
 2019-05-20 00:33:27.461	response	servidor envia respuesta a/127.0.0.1:57210
+DATETIME		EVENT		DESCRIPTION
+
+2019-05-20 00:36:54.781	connection	/127.0.0.1:57220conexion entrante
+
+
+2019-05-20 00:36:57.218	command		/127.0.0.1:57220 ls
+
+
+2019-05-20 00:36:57.342	response	servidor envia respuesta a/127.0.0.1:57220
+
+
+2019-05-20 00:37:05.186	command		/127.0.0.1:57220 ls
+
+
+2019-05-20 00:37:05.286	response	servidor envia respuesta a/127.0.0.1:57220
