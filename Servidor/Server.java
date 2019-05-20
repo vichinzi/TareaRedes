@@ -186,12 +186,13 @@ public class Server {
         //dividir en las maquinas correspondientes
 
         int largodenvio = 1024 * 64;// 64KB
-        byte[] buffer = new byte[largodenvio];
+        //byte[] buffer = new byte[largodenvio];
 
         //try-with-resources to ensure closing stream
         int largobase = 0;
         int nro_index = 0;
         String str_largo;
+        int tento;
         while (largito > 0) {//mientras queden bytes por enviar
 
             int randomIPindex = ThreadLocalRandom.current().nextInt(0, n_ip);
@@ -233,6 +234,7 @@ public class Server {
             //out.write(buffer, 0, largodenvio);
             
         }
+
 
         //bos.write(mybytearray, 0, largito);
         //System.out.println("Archivo creado");
@@ -370,7 +372,7 @@ class ThreadSocket extends Thread{
                     try {
                         new Server().recibirparanenvio(sc,nombre,ips,archivo,n_ip,11111,sinexts[0],palabra);
 
-                        String adesong = palabra + " " + nombre;
+                        String adesong = palabra + " " + nombre + "\n";
                         BufferedWriter indx = new BufferedWriter(new FileWriter(file,true));//escribo la ip en el index
                         indx.write(adesong);
                         indx.close();
