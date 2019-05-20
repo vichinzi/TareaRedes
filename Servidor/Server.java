@@ -198,7 +198,7 @@ public class Server {
             int randomIPindex = ThreadLocalRandom.current().nextInt(0, n_ip);
             String ipcita = ipes[randomIPindex];//obtengo la ip donde quedara el pedazito
             BufferedWriter escribirr = new BufferedWriter(new FileWriter(file,true));//escribo la ip en el index
-            escribirr.write(ipcita);
+            escribirr.write(ipcita + "\n");
             System.out.println(ipcita);
             escribirr.close();
 
