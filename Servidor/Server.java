@@ -212,8 +212,7 @@ public class Server {
             DataInputStream inpst = new DataInputStream(socketmaquina.getInputStream());
             System.out.println(inpst.readUTF()); //confirmacion de que se recivio el nombre
             str_largo = Integer.toString(largito);
-            outps.writeUTF(str_largo);
-            System.out.println(inpst.readUTF());//confirmacion de que se recivio el largo
+            System.out.println("El largo es: " inpst.readUTF());//confirmacion de que se recivio el largo
 
             //falta el handshake!!!
 
